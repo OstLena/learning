@@ -1,4 +1,4 @@
-package Module2;
+package module2;
 
 public class MathUtils {
     public int sum(int a, int b) {

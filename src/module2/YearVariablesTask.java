@@ -1,4 +1,4 @@
-package Module2;
+package module2;
 
 import java.math.BigDecimal;
 import java.time.Month;

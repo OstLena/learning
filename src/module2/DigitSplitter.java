@@ -1,4 +1,4 @@
-package Module2;
+package module2;
 
 public class DigitSplitter {
     public int getFirstDigit(int number) {

@@ -1,4 +1,4 @@
-package Module2;
+package module2;
 
 public class BrokenKeyboardCalculator {
     public int add(int a, int b) {
