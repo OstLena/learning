@@ -1,29 +1,32 @@
 package module9;
 
-public class MyStack {
+public class MyStack<T> {
 
-    private Node firstElement;
-    private Node lastElement;
+    private Node<T> firstElement;
+    private Node<T> lastElement;
     private int size;
 
-    public void push(Object value) {
+    public void push(T value) {
         if (firstElement == null) {
-            firstElement = new Node(value);
+            firstElement = new Node<T>(value);
             lastElement = firstElement;
         } else {
             Node tempElement = lastElement;
-            lastElement = new Node(value);
+            lastElement = new Node<T>(value);
             tempElement.next = lastElement;
             lastElement.prev = tempElement;
         }
         size++;
     }
 
-    public void remove(int index){
+    public void remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
-        Node toBeRemoved = getNode(index);
-        Node prev = toBeRemoved.prev;
-        Node next = toBeRemoved.next;
+        Node<T> toBeRemoved = getNode(index);
+        Node<T> prev = toBeRemoved.prev;
+        Node<T> next = toBeRemoved.next;
         if (prev != null) {
             prev.next = next;
         }
@@ -47,16 +50,16 @@ public class MyStack {
         return size;
     }
 
-    public Object peek() {
+    public T peek() {
         if (lastElement != null) {
             return lastElement.value;
         }
         return null;
     }
 
-    public Object poll() {
+    public T poll() {
         if (lastElement != null) {
-            Object toBePolled = lastElement.value;
+            T toBePolled = lastElement.value;
             lastElement = lastElement.prev;
 
             if (lastElement != null) {
@@ -70,20 +73,20 @@ public class MyStack {
         return null;
     }
 
-    class Node {
-        private Object value;
-        private Node prev;
-        private Node next;
+    class Node<T> {
+        private T value;
+        private Node<T> prev;
+        private Node<T> next;
 
 
-        public Node(Object value) {
+        public Node(T value) {
             this.value = value;
         }
     }
 
-    private Node getNode(int index) {
+    private Node<T> getNode(int index) {
         int i = 0;
-        Node result = firstElement;
+        Node<T> result = firstElement;
         while (i < index) {
             result = result.next;
             i++;

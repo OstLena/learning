@@ -1,16 +1,16 @@
 package module9;
 
-public class MyArrayList {
+public class MyArrayList<T> {
 
     private int size = 0;
 
-    private Object[] data = new Object[10];
+    private T[] data = (T[]) new Object[10];
 
-    public void add(Object value) {
+    public void add(T value) {
         data[size] = value;
         size++;
         if (size >= data.length) {
-            Object[] dataTemporary = new Object[data.length * 2];
+            T[] dataTemporary = (T[]) new Object[data.length * 2];
             for (int i = 0; i < size; i++) {
                 dataTemporary[i] = data[i];
             }
@@ -19,6 +19,9 @@ public class MyArrayList {
     }
 
     public void remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index);
+        }
         for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
@@ -27,7 +30,7 @@ public class MyArrayList {
     }
 
     public void clear() {
-        data = new Object[10];
+        data = (T[]) new Object[10];
         size = 0;
     }
 
@@ -35,7 +38,10 @@ public class MyArrayList {
         return size;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index);
+        }
         return data[index];
     }
 }

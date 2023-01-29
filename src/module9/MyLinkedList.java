@@ -1,19 +1,19 @@
 package module9;
 
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
-    private Node firstElement;
-    private Node lastElement;
+    private Node<T> firstElement;
+    private Node<T> lastElement;
     private int size;
 
 
-    public void add(Object value) {
+    public void add(T value) {
         if (firstElement == null) {
-            firstElement = new Node(value);
+            firstElement = new Node<T>(value);
             lastElement = firstElement;
         } else {
-            Node tempElement = lastElement;
-            lastElement = new Node(value);
+            Node<T> tempElement = lastElement;
+            lastElement = new Node<T>(value);
             tempElement.next = lastElement;
             lastElement.prev = tempElement;
         }
@@ -21,10 +21,13 @@ public class MyLinkedList {
     }
 
     public void remove(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index);
+        }
 
-        Node toBeRemoved = getNode(index);
-        Node prev = toBeRemoved.prev;
-        Node next = toBeRemoved.next;
+        Node<T> toBeRemoved = getNode(index);
+        Node<T> prev = toBeRemoved.prev;
+        Node<T> next = toBeRemoved.next;
         if (prev != null) {
             prev.next = next;
         }
@@ -48,13 +51,16 @@ public class MyLinkedList {
         return size;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException(index);
+        }
         return getNode(index).value;
     }
 
-    private Node getNode(int index) {
+    private Node<T> getNode(int index) {
         int i = 0;
-        Node result = firstElement;
+        Node<T> result = firstElement;
         while (i < index) {
             result = result.next;
             i++;
@@ -62,13 +68,13 @@ public class MyLinkedList {
         return result;
     }
 
-    class Node {
+    class Node<T> {
 
-        private Object value;
-        private Node prev;
-        private Node next;
+        private T value;
+        private Node<T> prev;
+        private Node<T> next;
 
-        public Node(Object value) {
+        public Node(T value) {
             this.value = value;
         }
     }

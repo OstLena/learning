@@ -1,18 +1,18 @@
 package module9;
 
-public class MyQueue {
+public class MyQueue<T> {
 
-    private Node firstElement;
-    private Node lastElement;
+    private Node<T> firstElement;
+    private Node<T> lastElement;
     private int size;
 
-    public void add(Object value) {
+    public void add(T value) {
         if (firstElement == null) {
-            firstElement = new Node(value);
+            firstElement = new Node<T>(value);
             lastElement = firstElement;
         } else {
-            Node tempElement = lastElement;
-            lastElement = new Node(value);
+            Node<T> tempElement = lastElement;
+            lastElement = new Node<T>(value);
             tempElement.next = lastElement;
             lastElement.prev = tempElement;
         }
@@ -29,17 +29,16 @@ public class MyQueue {
         return size;
     }
 
-    public Object peek() {
+    public T peek() {
         if (firstElement != null) {
             return firstElement.value;
         }
         return null;
     }
 
-    public Object poll() {
-
+    public T poll() {
         if (firstElement != null) {
-            Object toBePolled = firstElement.value;
+            T toBePolled = firstElement.value;
             firstElement = firstElement.next;
 
             if (firstElement != null) {
@@ -51,13 +50,13 @@ public class MyQueue {
         return null;
     }
 
-    class Node {
-        private Object value;
-        private Node prev;
-        private Node next;
+    class Node<T> {
+        private T value;
+        private Node<T> prev;
+        private Node<T> next;
 
 
-        public Node(Object value) {
+        public Node(T value) {
             this.value = value;
         }
     }
