@@ -20,6 +20,20 @@ public class MyHashMap<K, V> {
         if (added) {
             size++;
         }
+
+        if (size >= buckets.length * 3 / 4) {
+            List<K, V>[] bucketsTemporary = new List[buckets.length * 2];
+
+            for (int i = 0; i < buckets.length; i++) {
+                List<K, V> toMove = buckets[i];
+                if (toMove != null) {
+                    Integer hashCode = toMove.getHashCode();
+                    Integer index = hashCode % bucketsTemporary.length;
+                    bucketsTemporary[index] = toMove;
+                }
+            }
+            buckets = bucketsTemporary;
+        }
     }
 
     public void remove(K key) {
@@ -82,10 +96,12 @@ public class MyHashMap<K, V> {
 
     class List<K, V> {
         private Node<K, V> first;
+        private Integer hashCode;
 
         public boolean add(Entry<K, V> entry) {
             if (first == null) {
                 first = new Node<K, V>(entry);
+                hashCode = entry.key.hashCode();
             } else {
                 Node<K, V> find = first;
                 while (find != null) {
@@ -133,6 +149,10 @@ public class MyHashMap<K, V> {
                 }
             }
             return false;
+        }
+
+        public Integer getHashCode() {
+            return hashCode;
         }
     }
 }
