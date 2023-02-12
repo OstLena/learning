@@ -11,7 +11,7 @@ public class MoonRobotVespenGasDetector {
     }
 
     public boolean isTemperatureOk(boolean cold) {
-        return cold;
+        return !cold;
     }
 
     public boolean isGroundOkForVespenGas(int acidValue, int minAcid, int maxAcid, int density, boolean cold) {
