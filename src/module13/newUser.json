@@ -1,0 +1,22 @@
+{
+  "name": "NEW USER",
+  "username": "Lena",
+  "email": "newuser@gmail.com",
+  "address": {
+    "street": "Uyavna",
+    "suite": "Suite 001",
+    "city": "Shastlyve",
+    "zipcode": "00001-0001",
+    "geo": {
+      "lat": "24.6463",
+      "lng": "-168.8889"
+    }
+  },
+  "phone": "(00001)976-6794 x41206",
+  "website": "user.com",
+  "company": {
+    "name": "Day and Night",
+    "catchPhrase": "Switchable contextually-based project",
+    "bs": "aggregate real-time technologies"
+  }
+}
